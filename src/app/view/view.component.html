@@ -1,0 +1,111 @@
+<div class="container">
+  <form>
+  <div class="row">
+    <div class="col-12">
+      <div class="card text-center">
+        <div class="card-header">
+          Search Task
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Search Fields:</h5>
+
+            <div class="row">
+              <div class="col-6">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Task</span>
+                  </div>
+                  <input class="form-control" #title="ngModel" [(ngModel)]="filterTask.title"  name="title"
+                         placeholder=""
+                         type="text"/>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Parent Task</span>
+                  </div>
+                  <input class="form-control" #parentTask="ngModel" [(ngModel)]="filterTask.parentTask"
+                         name="parentTask" placeholder=""
+                         type="text"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Priority From</span>
+                  </div>
+                  <input class="form-control" name="min"
+                         [(ngModel)]="min"
+                         type="range"/>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Priority To</span>
+                </div>
+                <input class="form-control" name="max"
+                        [(ngModel)]="max"
+                       type="range"/>
+              </div>
+              <div class="col-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Start Date</span>
+                </div>
+                <input class="form-control" name="title"
+                       type="text"/>
+              </div>
+              <div class="col-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">End Date</span>
+                </div>
+                <input class="form-control"
+                       name="title"
+                       type="text"/>
+              </div>
+
+            </div>
+          <div class="card-footer text-muted">
+            Results
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                  <td>ID</td>
+                  <td>Task</td>
+                  <td>Parent Task</td>
+                  <td>Priority</td>
+                  <td>Summary</td>
+                  <td>Start Date</td>
+                  <td>End Date</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let t of tasks | filterPipe : filterTask:min:max" >
+                  <td (click)="update(t)">{{t.id}}</td>
+                  <td (click)="update(t)">{{t.title}}</td>
+                  <td (click)="update(t)">{{t.parentTask.title}}</td>
+                  <td (click)="update(t)">{{t.priority}}</td>
+                  <td (click)="update(t)">{{t.summary}}</td>
+                  <td (click)="update(t)" >{{t.startDate | date:"dd-MM-yyyy"}}</td>
+                  <td (click)="update(t)">{{t.endDate | date:"dd-MM-yyyy"}}</td>
+                  <td>
+                    <a (click)="delete(t)" class="btn btn-primary" role="button" routerLinkActive="active">Delete</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </form>
+</div>

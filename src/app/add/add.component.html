@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <form>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Task</span>
+          </div>
+          <input #title="ngModel" [(ngModel)]="task.title" class="form-control" name="title" placeholder="title"
+                 type="text"/>
+        </div>
+
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Priority</span>
+          </div>
+          <input #priority="ngModel" [(ngModel)]="task.priority" class="form-control" max="5" min="0" name="priority"
+                 type="range"/>
+        </div>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Parent Task</span>
+          </div>
+          <input #parentTask="ngModel" [(ngModel)]="task.parentTask.title" class="form-control" name="ptitle"
+                 placeholder="ptitle"
+                 type="text"/>
+        </div>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Start Date</span>
+          </div>
+          <input #startDate="ngModel" [(ngModel)]="task.startDate" class="form-control" name="stDate" type="date"/>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">End Date</span>
+          </div>
+          <input #endDate="ngModel"  [(ngModel)]="task.endDate" class="form-control" name="etDate" type="date"/>
+        </div>
+
+      </form>
+      <a class="btn btn-primary" (click)="onSubmit()" role="button" routerLinkActive="active">save</a>
+      <a class="btn btn-primary" routerLink="/view" role="button" routerLinkActive="active">back</a>
+    </div>
+    <div class="col"></div>
+
+  </div>
+</div>
