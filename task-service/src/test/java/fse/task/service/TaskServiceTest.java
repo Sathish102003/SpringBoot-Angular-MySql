@@ -1,10 +1,8 @@
 package fse.task.service;
 
-import fse.task.model.ParentTask;
 import fse.task.model.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 

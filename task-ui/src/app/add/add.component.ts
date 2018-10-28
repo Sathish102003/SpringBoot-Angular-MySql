@@ -1,10 +1,9 @@
 import {Component, OnInit, Output} from '@angular/core';
-import {log} from 'util';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskServiceService} from '../task-service.service';
 import {Task} from '../task';
-import {ParentTask} from '../parentTask';
-import {DatePipe} from "@angular/common";
+import {ParentTask} from "../parentTask";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-task-add',
@@ -14,6 +13,7 @@ import {DatePipe} from "@angular/common";
 export class AddComponent implements OnInit {
   @Output() tasks;
   task: Task;
+  parents: ParentTask[];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -21,20 +21,29 @@ export class AddComponent implements OnInit {
   ) {
     this.task = new Task();
     this.task.priority = 1;
-    this.task.title = 'asdas';
-    this.task.parentTask = new ParentTask();
-    this.task.parentTask.title = 'Ptitle';
-
   }
+
   ngOnInit() {
-
+    this.loadParents();
   }
+
   onSubmit() {
     this.taskService.addTask(this.task).then(
       value => {
         this.router.navigate(['./view']);
       }
-        );
-      }
+    );
+  }
+
+  private loadParents() {
+    this.parents = [];
+    this.parents.push({'parentId': null, parentTask: ''});
+    this.parentTaskService.findAll().subscribe(
+      (res: HttpResponse<ParentTask[]>) => {
+        res.body.forEach(parent => this.parents.push(parent));
+      },
+      (res: HttpErrorResponse) => this.parents = []
+    );
+  }
 }
 

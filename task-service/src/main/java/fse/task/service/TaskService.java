@@ -1,6 +1,5 @@
 package fse.task.service;
 
-import fse.task.model.ParentTask;
 import fse.task.model.Task;
 import fse.task.repository.TaskRepository;
 import org.springframework.stereotype.Service;
