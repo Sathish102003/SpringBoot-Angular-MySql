@@ -1,4 +1,4 @@
-package fse.task.service.model;
+package fse.task.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,9 +13,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "TASK")
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TASK_SEQ")
+    @SequenceGenerator(sequenceName = "TASK_SEQ", name = "TASK_SEQ", allocationSize = 1)
     private long id;
 
     private String title;
@@ -29,6 +31,6 @@ public class Task {
     private Integer priority;
 
     @ManyToOne
-    @JoinColumn(name = "parent_id")
+    @JoinColumn(name = "PARENT_TASK_ID")
     private ParentTask parentTask;
 }

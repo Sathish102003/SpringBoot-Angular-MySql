@@ -1,6 +1,6 @@
-package fse.task.service.data.jpa;
+package fse.task.repository;
 
-import fse.task.service.model.Task;
+import fse.task.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

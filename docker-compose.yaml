@@ -1,0 +1,40 @@
+version: '3'
+services:
+  nginx:
+    container_name: some-nginx
+    image: nginx:1.13
+    restart: always
+    ports:
+      - 80:80
+      - 81:81
+      - 443:443
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./task-manager/dist/task-manager:/static
+
+  mysql:
+    container_name: some-mysql
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_DATABASE: task
+      MYSQL_ROOT_PASSWORD: task
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3312:3306"
+    restart: always
+
+  app:
+    restart: always
+    build: ./tasks
+    working_dir: /tasks
+    volumes:
+      - ./tasks:/tasks
+      - ~/.m2:/root/.m2
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    command: mvn clean spring-boot:run
+    depends_on:
+      - nginx
+      - mysql

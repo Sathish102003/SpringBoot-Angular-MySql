@@ -1,4 +1,4 @@
-package fse.task.service;
+package fse.task;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
