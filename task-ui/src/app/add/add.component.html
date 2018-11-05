@@ -4,7 +4,7 @@
     <div class="col">
       <div class="input-group">
         <span class="input-group-text mb-3">Task</span>
-        <input #title="ngModel" [(ngModel)]="task.title" class="form-control" name="title" type="text"/>
+        <input #title="ngModel" [(ngModel)]="task.task" class="form-control" name="title" type="text"/>
       </div>
 
       <div class="input-group">
@@ -16,7 +16,7 @@
       <div class="input-group">
         <span class="input-group-text mb-3">Parent Task</span>
         <select class="form-control" id="parentTask" name="parent" [(ngModel)]="parentId">
-          <option *ngFor="let parent of parents" value="{{parent.parentId}}">{{parent.parentTask}}</option>
+          <option *ngFor="let parent of parents" value="{{parent.id}}">{{parent.task}}</option>
         </select>
       </div>
 

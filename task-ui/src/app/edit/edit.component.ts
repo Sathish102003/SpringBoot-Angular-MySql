@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Task} from '../task';
 import {ActivatedRoute, Router} from '@angular/router';
-import {log} from 'util';
+//import {log} from 'util';
 import {TaskServiceService} from '../task-service.service';
 import {DatePipe} from "@angular/common";
 
@@ -13,6 +13,8 @@ import {DatePipe} from "@angular/common";
 export class EditComponent implements OnInit {
   tasks: Task[];
   task: Task;
+  parents= [];
+  parentId: number;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -25,7 +27,7 @@ export class EditComponent implements OnInit {
     });
   }
   onSubmit() {
-    log(this.task);
+   // log(this.task);
     this.taskService.updateTask(this.task.id, this.task)
       .then(
        value => { this.router.navigate(['./view']);

@@ -16,9 +16,8 @@ import javax.persistence.*;
 public class ParentTask {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String title;
+    private String task;
 
 }

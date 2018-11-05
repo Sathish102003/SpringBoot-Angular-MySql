@@ -11,16 +11,18 @@ import {TaskServiceService} from '../task-service.service';
 export class ViewComponent implements OnInit {
   tasks: Task[];
   filterTask: Task;
-  min: number =0;
-  max: number =5;
+  filterId: number;
+  parentTaskFilterId: number;
+  priorityFromFilterId: number;
+  priorityToFilterId: number;
+  startDateFilter: Date;
+  endDateFilter: Date;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private taskService: TaskServiceService) {
     this.getTasks();
-
   }
-
 
   ngOnInit() {
     this.getTasks();
@@ -28,7 +30,7 @@ export class ViewComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.taskService.getTasks().then(value => this.tasks = value);
+    this.taskService.getAllTasks().then(value => this.tasks = value);
   }
   update(t: Task ): void {
     this.router.navigate(['/update' , t.id]);

@@ -1,6 +1,8 @@
 package fse.task.service;
 
+import fse.task.model.ParentTask;
 import fse.task.model.Task;
+import fse.task.repository.ParentTaskRepository;
 import fse.task.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,9 @@ public class TaskService {
 
     @Resource
     private TaskRepository taskRepository;
+
+    @Resource
+    private ParentTaskRepository parentTaskRepository;
 
     public List<Task> findAllTasks() {
         return taskRepository.findAll();
@@ -31,6 +36,12 @@ public class TaskService {
 
     @Transactional
     public void addTask(final Task task) {
+/*        if (task.getParentTask() != null) {
+            final ParentTask parentTask = new ParentTask();
+            parentTask.setId(task.getParentTask().getId());
+            addParentTask(parentTask);
+            task.setParentTask(parentTask);
+        }*/
         taskRepository.save(task);
     }
 
@@ -38,4 +49,9 @@ public class TaskService {
     public void deleteTask(final long id) {
         taskRepository.deleteById(id);
     }
+
+/*    @Transactional
+    public void addParentTask(final ParentTask parentTask) {
+        parentTaskRepository.save(parentTask);
+    }*/
 }

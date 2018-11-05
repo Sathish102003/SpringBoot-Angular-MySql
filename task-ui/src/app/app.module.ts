@@ -1,14 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { ViewComponent } from './view/view.component';
-import { AddComponent } from './add/add.component';
-import { AppRoutingModule } from './app-routing.module';
-import { EditComponent } from './edit/edit.component';
+import {AppComponent} from './app.component';
+import {ViewComponent} from './view/view.component';
+import {AddComponent} from './add/add.component';
+import {AppRoutingModule} from './app-routing.module';
+import {EditComponent} from './edit/edit.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { FilterPipePipe } from './filter-pipe.pipe';
+import {FormsModule} from '@angular/forms';
+import {TaskFilter} from './task-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { FilterPipePipe } from './filter-pipe.pipe';
     ViewComponent,
     AddComponent,
     EditComponent,
-    FilterPipePipe
+    TaskFilter
   ],
   imports: [
     BrowserModule,
@@ -27,4 +27,5 @@ import { FilterPipePipe } from './filter-pipe.pipe';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

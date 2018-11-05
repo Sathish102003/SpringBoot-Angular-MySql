@@ -1,4 +1,4 @@
 export class ParentTask {
-  id: String;
-  title: String;
+  id: number;
+  task: String;
 }

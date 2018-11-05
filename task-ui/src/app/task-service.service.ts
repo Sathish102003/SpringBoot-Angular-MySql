@@ -8,7 +8,7 @@ import {Task} from './task';
 })
 export class TaskServiceService {
   http: HttpClient;
-  tasksUrl = 'http://localhost:8080/api/tasks';
+  tasksUrl = 'http://localhost:8080/api/alltasks';
   taskUrl = 'http://localhost:8080/api/task/';
 
   //taskUrl = 'assets/MOCK_DATA.json';
@@ -16,19 +16,19 @@ export class TaskServiceService {
     this.http = http;
   }
 
-  getTasks(): Promise<any> {
-    return this.http.get(this.tasksUrl).toPromise().then(value => value);
+  getAllTasks(): Promise<any> {
+    return this.http.get<Task>(this.tasksUrl).toPromise().then(value => value);
   }
 
-  getTask(id: String): Promise<any> {
+  getTask(id: string): Promise<any> {
     return this.http.get(this.taskUrl + '' + id).toPromise().then(value => value);
   }
 
-  updateTask(id: String, t: Task): Promise<any> {
+  updateTask(id: number, t: Task): Promise<any> {
     return this.http.put(this.taskUrl + '' + id, t).toPromise().then(value => value);
   }
 
-  deleteTask(id: String, t: Task): Promise<any> {
+  deleteTask(id: number, t: Task): Promise<any> {
     return this.http.delete(this.taskUrl + '' + id).toPromise().then(value => value);
   }
 

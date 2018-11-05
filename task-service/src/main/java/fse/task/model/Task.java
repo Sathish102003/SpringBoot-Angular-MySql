@@ -20,17 +20,17 @@ public class Task {
     @SequenceGenerator(sequenceName = "TASK_SEQ", name = "TASK_SEQ", allocationSize = 1)
     private long id;
 
-    private String title;
+    private String task;
 
-    private String summary;
-
+    @Temporal(TemporalType.DATE)
     private Date startDate;
 
+    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     private Integer priority;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "PARENT_TASK_ID")
     private ParentTask parentTask;
 }
