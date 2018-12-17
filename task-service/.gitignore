@@ -4,6 +4,14 @@
 /dist
 /tmp
 /out-tsc
+.idea/
+*.iml
+target/
+*.class
+.settings/
+.project
+.classpath
+/bin
 
 # dependencies
 /node_modules
