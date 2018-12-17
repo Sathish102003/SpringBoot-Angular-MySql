@@ -28,8 +28,9 @@
         <span class="input-group-text mb-3">End Date</span>
         <input #endDate="ngModel" [(ngModel)]="task.endDate" class="form-control" name="etDate" type="date"/>
       </div>
+      <div *ngIf="!!(errorMsg)" class="alert alert-danger" role="alert"> {{ errorMsg }}</div>
       <button type="button" class="btn btn-primary mr-3" (click)="onSubmit()">Update</button>
-      <button type="button" class="btn btn-primary mr-3" (click)="onSubmit()">Cancel</button>
+      <button type="button" class="btn btn-primary mr-3" (click)="cancel()">Cancel</button>
     </div>
     <div class="col"></div>
 

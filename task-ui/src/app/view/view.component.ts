@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Task} from '../task';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskServiceService} from '../task-service.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-task-view',
@@ -11,8 +12,8 @@ import {TaskServiceService} from '../task-service.service';
 export class ViewComponent implements OnInit {
   tasks: Task[];
   filterTask: Task;
-  filterId: number;
-  parentTaskFilterId: number;
+  taskName: string;
+  parentTaskName: string;
   priorityFromFilterId: number;
   priorityToFilterId: number;
   startDateFilter: Date;
@@ -34,6 +35,20 @@ export class ViewComponent implements OnInit {
   }
   update(t: Task ): void {
     this.router.navigate(['/update' , t.id]);
+  }
+
+  isTaskExpired(t: Task): boolean {
+    return moment(t.endDate).isBefore(moment())
+  }
+
+  endTask(t: Task): void {
+    t.endDate = new Date(moment.now());
+    this.taskService.updateTask(t.id, t)
+      .then(
+        value => {
+          this.getTasks();
+        }
+      );
   }
 
   delete(t: Task): void {

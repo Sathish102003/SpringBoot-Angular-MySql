@@ -7,12 +7,12 @@
           <div class="card-body">
 
             <div class="row">
-              <div class="col-md-3  mb-3"><label for="filterId">Task</label></div>
-              <div class="col-md-3  mb-3"><input type="text" name="task" [(ngModel)]="filterId" class="form-control"
-                                                 id="filterId"></div>
-              <div class="col-md-3  mb-3"><label for="parentTaskFilterId">Parent Task</label></div>
-              <div class="col-md-3  mb-3"><input type="text" name="parentTask" [(ngModel)]="parentTaskFilterId"
-                                                 class="form-control" id="parentTaskFilterId"></div>
+              <div class="col-md-3  mb-3"><label for="taskName">Task</label></div>
+              <div class="col-md-3  mb-3"><input type="text" name="task" [(ngModel)]="taskName" class="form-control"
+                                                 id="taskName"></div>
+              <div class="col-md-3  mb-3"><label for="parentTaskName">Parent Task</label></div>
+              <div class="col-md-3  mb-3"><input type="text" name="parentTask" [(ngModel)]="parentTaskName"
+                                                 class="form-control" id="parentTaskName"></div>
               <div class="col-md-3  mb-3"><label for="priorityFromFilterId">Priority From</label></div>
               <div class="col-md-3  mb-3"><input type="text" class="form-control" name="priorityFrom"
                                                  [(ngModel)]="priorityFromFilterId" id="priorityFromFilterId"></div>
@@ -31,7 +31,7 @@
               <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                  <th scope="col">ID</th>
+                 <!-- <th scope="col">ID</th>-->
                   <th scope="col">Task</th>
                   <th scope="col">Parent Task</th>
                   <th scope="col">Priority</th>
@@ -42,17 +42,18 @@
                 </thead>
                 <tbody>
                 <tr
-                  *ngFor="let t of tasks | TaskFilter : filterId : parentTaskFilterId : priorityFromFilterId : priorityToFilterId : startDateFilter : endDateFilter">
-                  <td>{{t.id}}</td>
+                  *ngFor="let t of tasks | TaskFilter : taskName : parentTaskName : priorityFromFilterId : priorityToFilterId : startDateFilter : endDateFilter">
+                  <!--<td>{{t.id}}</td>-->
                   <td>{{t.task}}</td>
-                  <td>{{t.parentTask?t.parentTask.id: null}}</td>
+                 <!-- <td>{{t.parentTask?t.parentTask.id: null}}</td>-->
+                  <td>{{t.parentTask?t.parentTask.task: null}}</td>
                   <!-- <td (click)="update(t)">{{t.parentTask.task}}</td>-->
                   <td>{{t.priority}}</td>
                   <td>{{t.startDate | date:"dd-MM-yyyy"}}</td>
                   <td>{{t.endDate | date:"dd-MM-yyyy"}}</td>
                   <td>
-                    <button type="button" class="btn btn-primary mr-3" (click)="update(t)">Edit</button>
-                    <button type="button" class="btn btn-primary" (click)="delete(t)">Delete</button>
+                    <button type="button" class="btn btn-primary mr-3" [disabled] = isTaskExpired(t) (click)="update(t)">Edit</button>
+                    <button type="button" class="btn btn-primary" [disabled] = isTaskExpired(t) (click)="endTask(t)">End Task</button>
                   </td>
                 </tr>
                 </tbody>

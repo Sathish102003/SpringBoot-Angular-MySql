@@ -36,12 +36,10 @@ public class TaskService {
 
     @Transactional
     public void addTask(final Task task) {
-/*        if (task.getParentTask() != null) {
-            final ParentTask parentTask = new ParentTask();
-            parentTask.setId(task.getParentTask().getId());
-            addParentTask(parentTask);
-            task.setParentTask(parentTask);
-        }*/
+        if (task.getParentTask() != null) {
+            Optional<ParentTask> optParentTask = parentTaskRepository.findById(task.getParentTask().getId());
+            optParentTask.ifPresent(task::setParentTask);
+        }
         taskRepository.save(task);
     }
 
@@ -50,8 +48,4 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-/*    @Transactional
-    public void addParentTask(final ParentTask parentTask) {
-        parentTaskRepository.save(parentTask);
-    }*/
 }
